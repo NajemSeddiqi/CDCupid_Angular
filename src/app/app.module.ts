@@ -26,6 +26,9 @@ import { AuthGuard } from './guards/auth-guard.guard';
 import { UserService } from './services/user.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     MessagesComponent,
     MemberCardComponent,
     MemberDetailComponent,
+    MemberEditComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -67,6 +71,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     UserService,
     MemberDetailResolver,
     MemberListResolver,
+    MemberEditResolver,
+    PreventUnsavedChanges,
   ],
   bootstrap: [AppComponent],
 })
