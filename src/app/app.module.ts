@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -15,7 +17,6 @@ import { AuthService } from './services/auth.service';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './services/error.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -49,9 +50,12 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
   imports: [
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
     NgxGalleryModule,
     FileUploadModule,
     TabsModule.forRoot(),

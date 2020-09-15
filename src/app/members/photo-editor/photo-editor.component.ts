@@ -13,7 +13,6 @@ import { AlertifyService } from './../../services/alertify.service';
 })
 export class PhotoEditorComponent implements OnInit {
   @Input() photos: Photo[];
-  @Output() getMemberPhotoChange = new EventEmitter<string>();
 
   currentMain: Photo;
   baseUrl = environment.apiUrl;
@@ -60,6 +59,11 @@ export class PhotoEditorComponent implements OnInit {
           isMain: response.isMain,
         };
         this.photos.push(photo);
+        if (photo.isMain) {
+          this.auth.changeMemberPhoto(photo.url);
+          this.auth.currentUser.photoUrl = photo.url;
+          localStorage.setItem('user', JSON.stringify(this.auth.currentUser));
+        }
       }
     };
   }

@@ -15,7 +15,7 @@
       <div class="card">
         <img
           class="card-img-top img-thumbnail"
-          src="{{ photoUrl }}"
+          src="{{ photoUrl || '../../../assets/user.png' }}"
           alt="{{ user.knownAs }}"
         />
         <div class="card-body">
@@ -52,13 +52,14 @@
         <tabset class="member-tabset">
           <tab heading="Edit Profile {{ user.knownAs }}">
             <form #editForm="ngForm" id="editForm" (ngSubmit)="updateUser()">
-              <h4>Description</h4>
+              <h4>Introduction</h4>
               <textarea
                 class="form-control"
                 name="introduction"
                 rows="6"
                 [(ngModel)]="user.introduction"
               ></textarea>
+
               <h4>Looking for</h4>
               <textarea
                 class="form-control"
@@ -66,13 +67,15 @@
                 rows="6"
                 [(ngModel)]="user.lookingFor"
               ></textarea>
-              <h4>Looking for</h4>
+
+              <h4>Interests</h4>
               <textarea
                 class="form-control"
                 name="interests"
                 rows="6"
                 [(ngModel)]="user.interests"
               ></textarea>
+
               <h4>Location Details:</h4>
               <div class="form-inline">
                 <label for="city">City</label>
@@ -93,10 +96,7 @@
             </form>
           </tab>
           <tab heading="Edit Photos">
-            <app-photo-editor
-              [photos]="user.photos"
-              (getMemberPhotoChange)="updateMainPhoto($event)"
-            ></app-photo-editor>
+            <app-photo-editor [photos]="user.photos"></app-photo-editor>
           </tab>
         </tabset>
       </div>
