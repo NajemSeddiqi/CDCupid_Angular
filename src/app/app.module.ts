@@ -32,6 +32,7 @@ import { MemberEditComponent } from './members/member-edit/member-edit.component
 import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
+import { TimeAgoExtendsPipe } from './customPipes/timeAgoExtends.pipe';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { PhotoEditorComponent } from './members/photo-editor/photo-editor.compon
     MemberDetailComponent,
     MemberEditComponent,
     PhotoEditorComponent,
+    TimeAgoExtendsPipe,
   ],
   imports: [
     BrowserAnimationsModule,
