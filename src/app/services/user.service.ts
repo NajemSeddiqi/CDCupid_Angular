@@ -17,9 +17,9 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   // prettier-ignore
-  getUsers(page?: number, itemsPerPage?: number, userParams?: UserParams): Observable<PaginatedResult<User[]>> {
+  getUsers(page?: number, itemsPerPage?: number, userParams?: UserParams, likesParam?: any): Observable<PaginatedResult<User[]>> {
     const paginatedResult: PaginatedResult<User[]> = new PaginatedResult<User[]>();
-    const params = this.getHttpParams(page, itemsPerPage, userParams);
+    const params = this.getHttpParams(page, itemsPerPage, userParams, likesParam);
 
     return this.http
       .get<User[]>(this.baseUrl, { observe: 'response', params })
@@ -35,7 +35,7 @@ export class UserService {
   }
 
   // prettier-ignore
-  getHttpParams( page?: number, itemsPerPage?: number,userParams?: UserParams): HttpParams {
+  getHttpParams( page?: number, itemsPerPage?: number, userParams?: UserParams, likesParam?: any): HttpParams {
     let params = new HttpParams();
 
     if (page != null && itemsPerPage != null) {
@@ -49,6 +49,15 @@ export class UserService {
       params = params.append('gender', userParams.gender);
       params = params.append('orderBy', userParams.orderBy);
     }
+
+    if (likesParam === 'Likers'){
+      params = params.append('likers', 'true');
+    }
+
+    if (likesParam === 'Likees'){
+      params = params.append('likees', 'true');
+    }
+
     return params;
   }
 
@@ -66,5 +75,9 @@ export class UserService {
 
   deletePhoto(userId: number, id: number): Observable<Photo> {
     return this.http.delete<Photo>(this.baseUrl + userId + '/photos/' + id);
+  }
+
+  sendLike(id: number, recipientId: number): Observable<object> {
+    return this.http.post(this.baseUrl + id + '/like/' + recipientId, {});
   }
 }
