@@ -17,8 +17,11 @@ export class AuthService {
   currentUser: User;
   photoUrl = new BehaviorSubject<string>('../../assets/user.png');
   currentPhotoUrl = this.photoUrl.asObservable();
+  unreadMessages = new BehaviorSubject<number>(0);
+  amount = this.unreadMessages.asObservable();
 
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
 
   changeMemberPhoto(photoUrl: string): void {
     this.photoUrl.next(photoUrl);

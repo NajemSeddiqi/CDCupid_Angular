@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { User } from '../_models/user';
 import { PaginatedResult, Pagination } from './../_models/pagination';
 import { ActivatedRoute } from '@angular/router';
+import { UserParams } from './../_models/userParams';
 
 @Component({
   selector: 'app-lists',
@@ -15,13 +16,14 @@ export class ListsComponent implements OnInit {
   users: User[];
   pagination: Pagination;
   likesParam: string;
+  userParams: UserParams = { gender: 'all', minAge: 18, maxAge: 99, orderBy: 'lastActive' };
 
   constructor(
     private auth: AuthService,
     private userService: UserService,
     private alertify: AlertifyService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((d) => {
@@ -36,7 +38,7 @@ export class ListsComponent implements OnInit {
       .getUsers(
         this.pagination.currentPage,
         this.pagination.itemsPerPage,
-        null,
+        this.userParams,
         this.likesParam
       )
       .subscribe(

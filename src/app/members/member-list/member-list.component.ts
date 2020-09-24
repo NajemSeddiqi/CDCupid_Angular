@@ -16,6 +16,7 @@ export class MemberListComponent implements OnInit {
   user: User = JSON.parse(localStorage.getItem('user'));
 
   genderList = [
+    { value: 'all', display: 'All' },
     { value: 'male', display: 'Males' },
     { value: 'female', display: 'Females' },
   ];
@@ -27,7 +28,7 @@ export class MemberListComponent implements OnInit {
     private userService: UserService,
     private alertify: AlertifyService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe((d) => {

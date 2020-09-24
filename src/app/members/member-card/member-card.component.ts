@@ -16,13 +16,13 @@ export class MemberCardComponent implements OnInit {
     private auth: AuthService,
     private userService: UserService,
     private alertify: AlertifyService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   sendLike(id: number): void {
     this.userService.sendLike(this.auth.decodedToken.nameid, id).subscribe(
-      (d) => {
+      () => {
         this.alertify.success('You have liked: ' + this.user.knownAs);
       },
       (err) => {

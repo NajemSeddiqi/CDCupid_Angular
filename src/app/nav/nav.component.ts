@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { AlertifyService } from './../services/alertify.service';
 import { Router } from '@angular/router';
+import { UserService } from './../services/user.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,15 +12,17 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
   model: any = {};
   photoUrl: string;
+  unreadMessages: number;
 
   constructor(
     public auth: AuthService,
     private alertify: AlertifyService,
-    private router: Router
-  ) {}
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
     this.auth.currentPhotoUrl.subscribe((url) => (this.photoUrl = url));
+    this.auth.amount.subscribe(msg => this.unreadMessages = msg);
   }
 
   login(): void {

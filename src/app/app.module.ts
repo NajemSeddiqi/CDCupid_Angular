@@ -36,6 +36,8 @@ import { PreventUnsavedChanges } from './guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TimeAgoExtendsPipe } from './customPipes/timeAgoExtends.pipe';
 import { ListsResolver } from './_resolvers/lists.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver';
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { ListsResolver } from './_resolvers/lists.resolver';
     MemberEditComponent,
     PhotoEditorComponent,
     TimeAgoExtendsPipe,
+    MemberMessagesComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -89,6 +92,7 @@ import { ListsResolver } from './_resolvers/lists.resolver';
     MemberEditResolver,
     ListsResolver,
     PreventUnsavedChanges,
+    MessagesResolver,
   ],
   bootstrap: [AppComponent],
 })
