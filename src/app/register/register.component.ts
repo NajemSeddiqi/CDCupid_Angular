@@ -7,6 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
@@ -26,8 +27,9 @@ export class RegisterComponent implements OnInit {
     private auth: AuthService,
     private alertify: AlertifyService,
     private fb: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) { }
 
   ngOnInit(): void {
     this.bsConfig = {
@@ -66,16 +68,24 @@ export class RegisterComponent implements OnInit {
   }
 
   register(): void {
+    this.spinner.show();
     if (this.registerForm.valid) {
       this.user = { ...this.registerForm.value };
 
       this.auth.register(this.user).subscribe(
-        () => this.alertify.success('Registration successful'),
-        (err) => this.alertify.error(err),
-        () =>
+        () => {
+          this.alertify.success('Registration successful');
+        },
+        (err) => {
+          this.alertify.error(err);
+          this.spinner.hide();
+        },
+        () => {
           this.auth
             .login(this.user)
-            .subscribe(() => this.router.navigate(['/members']))
+            .subscribe(() => this.router.navigate(['/members']));
+          this.spinner.hide();
+        }
       );
     }
   }

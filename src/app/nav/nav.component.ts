@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { AlertifyService } from './../services/alertify.service';
 import { Router } from '@angular/router';
-import { UserService } from './../services/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-nav',
@@ -13,11 +13,13 @@ export class NavComponent implements OnInit {
   model: any = {};
   photoUrl: string;
   unreadMessages: number;
+  isLoading: boolean;
 
   constructor(
     public auth: AuthService,
     private alertify: AlertifyService,
     private router: Router,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -26,14 +28,17 @@ export class NavComponent implements OnInit {
   }
 
   login(): void {
+    this.spinner.show();
     this.auth.login(this.model).subscribe(
-      (next) => {
+      () => {
         this.alertify.success('Logged in successfully.');
       },
       (error) => {
         this.alertify.error(error);
+        this.spinner.hide();
       },
       () => {
+        this.spinner.hide();
         this.router.navigate(['/members']);
       }
     );

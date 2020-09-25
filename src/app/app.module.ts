@@ -12,6 +12,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -39,6 +40,7 @@ import { ListsResolver } from './_resolvers/lists.resolver';
 import { MessagesResolver } from './_resolvers/messages.resolver';
 import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,6 +63,7 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
+    NgxSpinnerModule,
     FormsModule,
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
@@ -96,4 +99,4 @@ import { MemberMessagesComponent } from './members/member-messages/member-messag
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
